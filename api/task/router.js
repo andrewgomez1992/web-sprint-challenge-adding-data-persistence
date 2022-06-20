@@ -4,24 +4,29 @@ const Tasks = require('./model')
 
 const router = express.Router()
 
-router.get('/', async (req, res, next) => {
-    const tasks = await Tasks.findTasks()
-    res.json(tasks)
-    // Tasks.findTasks()
-    //     .then(tasks => {
-    //         res.json(tasks)
-    //     })
-    //     .catch(next)
+router.get('/', (req, res, next) => {
+    Tasks.find()
+        .then(tasks => {
+            res.json(tasks)
+        })
+        .catch(next)
 })
 
+router.post('/', (req, res, next) => {
+    Tasks.insert(req.body)
+        .then(newTask => {
+            newTask.task_completed ? newTask.task_completed = true : newTask.task_completed = false;
+            res.status(201).json(newTask)
+        })
+        .catch(next)
+})
 
-// router.get("/", (req, res, next) => {
-//     Projects.findProjects()
-//         .then(projects => {
-//             res.json(projects)
-//         })
-//         .catch(next)
-// });
+// if (newTask.completed) {
+//     return newTask.task_completed = true
+// } else {
+//     return newTask.task_completed = false
+// }
+
 
 
 
