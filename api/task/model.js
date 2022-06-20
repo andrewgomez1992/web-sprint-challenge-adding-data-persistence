@@ -7,7 +7,7 @@ function findTasks() {
         .select(
             't.task_description',
             't.task_notes',
-            'task_completed',
+            't.task_completed',
             'p.project_name',
             'p.project_description'
         )

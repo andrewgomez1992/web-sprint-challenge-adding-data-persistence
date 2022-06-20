@@ -17,9 +17,7 @@ router.post('/', (req, res, next) => {
         .then(newProject => {
             res.status(201).json(newProject[0])
         })
-        .catch(err => {
-            res.status(500).json({ message: "Failed to create a project!" })
-        })
+        .catch(next)
 })
 
 module.exports = router;
