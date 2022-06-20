@@ -1,7 +1,7 @@
 // build your `Task` model here
 const db = require('../../data/dbConfig')
 
-async function find() {
+async function findTask() {
     const results = await db('tasks as t')
         .join('projects as p', 't.project_id', 'p.project_id')
         .select('task_id', 'task_description',
@@ -12,11 +12,10 @@ async function find() {
         ...task,
         task_completed: task.task_completed ? true : false
     }));
-
     return tasks;
 }
 
-function insert(task) {
+function insertTask(task) {
     return db('tasks')
         .insert(task)
         .then(ids => {
@@ -27,10 +26,7 @@ function insert(task) {
         })
 }
 
-
-
-
 module.exports = {
-    find,
-    insert
+    findTask,
+    insertTask
 }

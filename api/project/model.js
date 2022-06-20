@@ -11,8 +11,7 @@ function findProjects() {
         .catch(err => console.log(err.message))
 }
 
-// was running into bug using function
-const insert = (project) => {
+const insertProject = (project) => {
     return db('projects')
         .insert(project, 'project_id')
         .then(([project_id]) => db('projects').where({ project_id }))
@@ -25,10 +24,7 @@ const insert = (project) => {
         .catch(err => console.log(err.message))
 }
 
-
-
-
 module.exports = {
     findProjects,
-    insert
+    insertProject
 };
