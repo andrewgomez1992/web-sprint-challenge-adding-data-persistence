@@ -10,7 +10,7 @@ exports.up = async function (knex) {
 
         .createTable('resources', (tbl) => {
             tbl.increments('resource_id')
-            tbl.string('resource_name', 128).notNullable()
+            tbl.string('resource_name', 128).notNullable().unique()
             tbl.string('resource_description', 256)
         })
 
