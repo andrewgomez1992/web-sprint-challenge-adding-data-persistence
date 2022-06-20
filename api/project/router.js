@@ -4,12 +4,15 @@ const Projects = require("./model");
 
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
-    Projects.findProjects()
-        .then(project => {
-            res.json(project)
-        })
-        .catch(next)
+router.get("/", async (req, res, next) => {
+    const projects = await Projects.findProjects()
+    res.json(projects)
 });
+
+router.post('/', async (req, res, next) => {
+    const project = req.body
+    const newProject = await Projects.insert(project)
+    res.json(newProject)
+})
 
 module.exports = router;
